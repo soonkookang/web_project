@@ -11,6 +11,29 @@
     </select>
 
     <insert id="insertUser" parameterType="com.dev.backend.user.model.User">
-        INSERT INTO USER(USERNAME, PASSWORD, FIRST_NAME, LAST_NAME, CONTACT, EMAIL) VALUES(#{username}, #{password}, #{firstName}, #{lastName}, #{contact}, #{email})
+        INSERT INTO USER(USERNAME, PASSWORD, FIRST_NAME, LAST_NAME, CONTACT, EMAIL, CREATE_DATE, UPDATE_DATE) VALUES(#{username}, #{password}, #{firstName}, #{lastName}, #{contact}, #{email}, NOW(), NOW())
     </insert>
+
+    <update id="updateUser" parameterType="com.dev.backend.user.model.User">
+        UPDATE USER
+        <set>
+            <if test="null != password">
+                , PASSWORD = #{password}
+            </if>
+            <if test="null != firstName">
+                , FIRST_NAME = #{firstName}
+            </if>
+            <if test="null != lastName">
+                , LAST_NAME = #{lastName}
+            </if>
+            <if test="null != contact">
+                , CONTACT = #{contact}
+            </if>
+            <if test="null != email">
+                , EMAIL = #{email}
+            </if>
+            , UPDATE_DATE = NOW()
+        </set>
+        WHERE ID = #{id}
+    </update>
 </mapper>

@@ -6,6 +6,8 @@ import com.dev.backend.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -15,4 +17,27 @@ public class UserServiceImpl implements UserService {
     public User getUser(long id) {
         return userMapper.findUserById(id);
     }
+
+    public List<User> getAllUsers() {
+
+        return userMapper.findAllUsers();
+    }
+
+    public User createUser(User user) {
+
+        userMapper.insertUser(user);
+
+        return null;
+    }
+
+    public User updateUser(User user) {
+        userMapper.updateUser(user);
+        return null;
+    }
+
+    public User deleteUser(long id) {
+
+        return null;
+    }
+
 }
